@@ -18,7 +18,7 @@ router.get('/details/:id', (req, res) => {
   pool.query(query, [req.params.id])
     .then(result => {
       res.send(result.rows);
-    })//send back genre rows that have a matching movie ID
+    })
     .catch(error => {
       console.log('Error in getting movie in router', error);
       res.sendStatus(500);
