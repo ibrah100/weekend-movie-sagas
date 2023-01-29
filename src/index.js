@@ -52,11 +52,20 @@ const genres = (state = [], action) => {
     }
 }
 
+// Used to store details on rendering for details component
+const details = (state = {}, action) => {
+    if (action.type === 'SET_DETAILS') {
+        return action.payload;
+    } 
+    return state;
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        details
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
