@@ -37,7 +37,8 @@ function* fetchAllMovies() {
 
 function* getMovie(action) {
     try {
-        // geting unique id from database to retrieve specific movie details
+        // using unique id from action payload to retrieve specific movie details
+        // from database 
         const movieId = yield axios.get(`/api/genre/details/${action.payload.id}`);
         
         console.log("here are the genres for this movie:", movieId.data)

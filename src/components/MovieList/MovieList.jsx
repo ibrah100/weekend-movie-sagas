@@ -31,7 +31,8 @@ function MovieList() {
             type: 'GET_MOVIE', 
             payload: {id: movie.id}
         })
-        // useHistory to go to details page for movie
+        // useHistory to go to details page for movie with information
+        // gathred above
         history.push(`/details`);
     }
 
