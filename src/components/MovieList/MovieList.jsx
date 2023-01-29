@@ -7,6 +7,8 @@ function MovieList() {
     
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // getting movies list from redux reducer to be used in component
     const movies = useSelector(store => store.movies);
 
     // on render, load movies from database
@@ -14,17 +16,22 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
-    // handleClick function to go to the details page
+    // onClick function to go to the details page
     const viewDetails= (movie) =>{
-        // Using two dispatches to talk to
+        // Using two dispatches to talk to sagas in index.js
+        
+        // gathers details and stores them in a reducer to be used in Details.jsx
         dispatch({ 
             type: 'SET_DETAILS', 
             payload: movie 
         })
+
+        // activates getMovie function that get unique id to pull details for movie selected
         dispatch({ 
             type: 'GET_MOVIE', 
             payload: {id: movie.id}
         })
+        // useHistory to go to details page for movie
         history.push(`/details`);
     }
 

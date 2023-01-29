@@ -4,9 +4,13 @@ const pool = require('../modules/pool')
 
 router.get('/details/:id', (req, res) => {
   /*
-  Add query to get all genres by using
-  JOIN tables
+  Added query to target specific genres by id 
+  by first using JOIN to establish connection between
+  the movies and specific genres, then WHERE is used to
+  determine the genre with the unique movie id
   */
+  const uniqueMovieId = req.params.id;
+  
   const query = 
   `SELECT "genres"."name"
     FROM "genres"
@@ -15,7 +19,8 @@ router.get('/details/:id', (req, res) => {
     JOIN "movies"
     ON "movies_genres"."movie_id" = "movies"."id"
     WHERE "movies"."id" = $1;`;
-  pool.query(query, [req.params.id])
+
+  pool.query(query, [uniqueMovieId])
     .then(result => {
       res.send(result.rows);
     })
